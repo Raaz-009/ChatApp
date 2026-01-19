@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration Portal</title>
+
+    <!-- jsPDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 420px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0px 0px 8px rgba(0,0,0,0.2);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+        }
+        button {
+            background: #0078D4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005A9E;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>User Registration</h2>
+
+    <label>Name</label>
+    <input id="name" type="text">
+
+    <label>Email</label>
+    <input id="email" type="email">
+
+    <label>Mobile</label>
+    <input id="mobile" type="text">
+
+    <label>Date of Birth</label>
+    <input id="dob" type="text">
+
+    <label>City</label>
+    <input id="city" type="text">
+
+    <button onclick="generatePDF()">Submit & Download PDF</button>
+</div>
+
+<script>
+function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text("User Registration Confirmation", 20, 20);
+
+    doc.setFontSize(12);
+    doc.text("Name: " + document.getElementById("name").value, 20, 40);
+    doc.text("Email: " + document.getElementById("email").value, 20, 50);
+    doc.text("Mobile: " + document.getElementById("mobile").value, 20, 60);
+    doc.text("Date of Birth: " + document.getElementById("dob").value, 20, 70);
+    doc.text("City: " + document.getElementById("city").value, 20, 80);
+
+    doc.save("Confirmation.pdf");
+}
+</script>
+
+</body>
+</html>
